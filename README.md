@@ -1,109 +1,84 @@
-# SinapisAI Provider for DeepSeek Harness
+# SinapisAI Model Provider Plugin for DeepSeek Harness
 
-Use SinapisAI Router and other available SinapisAI models directly in
-DeepSeek Harness.
+This is a community plugin for DeepSeek Harness. It lets you use SinapisAI
+Router and other SinapisAI models directly in DeepSeek Harness.
+SinapisAI is an LLM API platform with an OpenAI-compatible interface and
+intelligent model routing. Visit the [SinapisAI website](https://mio.sinapisai.com)
+to learn more and get started.
 
 [简体中文](README.zh-CN.md)
 
-## Features
+## Highlights
 
-- Registers the native `sinapisai` provider and sets `sinapisai/router` as the
+### Automatic best-model routing
+
+The plugin uses `sinapisai/router` by default. Router is not a fixed model. It
+is SinapisAI's intelligent routing model: the service selects a suitable actual
+model for each task from the models currently available. Users do not need to
+switch models repeatedly for coding, analysis, tool use, or other workloads.
+
+### Other features
+
+- Registers the native `sinapisai` provider and makes `sinapisai/router` the
   Harness default model.
-- Keeps the SinapisAI API endpoint and OpenAI-compatible protocol built in.
-- Stores API keys in the Harness credential store rather than plugin config.
-- Synchronizes available chat models with search by model ID or name.
+- Includes the SinapisAI API endpoint and OpenAI-compatible protocol.
+- Stores the API key in the Harness credential store rather than plugin config.
+- Loads available chat models with search by model ID or name.
 - Synchronizes context windows, maximum output capacities, and image-input
-  support from the model directory.
+  support.
 - Supports streaming responses and tool calls.
-- Records the actual routed model only when the service returns it; model names
-  are never guessed.
-- Keeps Router and saved models available if model synchronization is
-  temporarily unavailable.
+- Keeps Router and saved models available if the model list is temporarily
+  unavailable.
 
 ## Install
 
-Install DeepSeek Harness and the package manager used by `dsh plugin` if they
-are not already available:
+If you run DeepSeek Harness through the official npx workflow:
 
 ```powershell
-npm install --global @deepseek-ai/dsh pnpm
+corepack enable
+npx -y --package @deepseek-ai/dsh dsh plugin --profile web add github:SinapisAI/sinapisai-dsh-provider
+npx -y @deepseek-ai/dsh web
 ```
 
-Install the published package and start Harness:
-
-```powershell
-dsh plugin --profile web add @sinapisai/dsh-provider
-dsh web
-```
-
-Before the npm package is published, install directly from GitHub:
+If a global `dsh` command is already available:
 
 ```powershell
 dsh plugin --profile web add github:SinapisAI/sinapisai-dsh-provider
 dsh web
 ```
 
-Open `http://127.0.0.1:3080`, then:
+The current release installs directly from GitHub. Cloning the repository and
+building it manually are not required. If Harness is already running, stop and
+restart it after installation.
+
+## Use
+
+Start Harness and open `http://127.0.0.1:3080`:
 
 1. Open **Settings -> SinapisAI**.
-2. Enter the API key.
+2. Enter your SinapisAI API key.
 3. Select **Load or refresh models**.
-4. Search and select the models you need.
-5. Save.
+4. Use the default `sinapisai/router`, or search for and select other models.
+5. Save the settings.
 
-The model selector exposes `SinapisAI / sinapisai/router` and the selected
-models.
+The model selector will show SinapisAI Router and the models you selected.
 
-## Installation in mainland China
+## Update
 
-If access to the default npm registry is slow, configure an npm mirror before
-installing:
-
-```powershell
-npm config set registry https://registry.npmmirror.com
-dsh plugin --profile web add @sinapisai/dsh-provider
-```
+Run the installation command again, then restart Harness.
 
 ## Uninstall
+
+For npx users:
+
+```powershell
+npx -y --package @deepseek-ai/dsh dsh plugin --profile web remove @sinapisai/dsh-provider
+```
+
+For global `dsh` users:
 
 ```powershell
 dsh plugin --profile web remove @sinapisai/dsh-provider
 ```
 
-Restart Harness after installation or removal.
-
-## Troubleshooting
-
-Older releases or other community plugins may cause pnpm to report missing
-`@deepseek-ai/*` peer dependencies. Harness resolves those peers from its own
-installation instead of installing duplicate framework instances into each
-profile. If the command ends with `Done`, do not install the listed peers
-manually.
-
-If port 3080 is occupied, locate and stop the previous process:
-
-```powershell
-Get-NetTCPConnection -LocalPort 3080 -State Listen |
-  Select-Object LocalAddress,LocalPort,OwningProcess
-Stop-Process -Id <OwningProcess>
-```
-
-Startup does not wait for model-directory synchronization. Synchronization
-requests time out after 15 seconds and results are cached in memory for five
-minutes. Router and saved models remain available when synchronization fails.
-
-## Development
-
-```powershell
-corepack pnpm install
-corepack pnpm check
-corepack pnpm pack:check
-```
-
-Link this checkout into an installed Harness profile:
-
-```powershell
-dsh plugin --profile web add C:\path\to\sinapisai-dsh-provider
-```
-
-No DeepSeek Harness source modification is required. Never commit an API key.
+Restart Harness after uninstalling the plugin.
