@@ -17,10 +17,11 @@
 
 ## 安装
 
-如果系统中还没有 `dsh` 命令，先安装 DeepSeek Harness：
+如果系统中还没有 `dsh` 和 `pnpm` 命令，先安装 DeepSeek Harness 以及
+`dsh plugin` 使用的包管理器：
 
 ```powershell
-npm install --global @deepseek-ai/dsh
+npm install --global @deepseek-ai/dsh pnpm
 ```
 
 安装已发布的 SinapisAI Provider 并启动 Harness：
@@ -65,6 +66,10 @@ dsh plugin --profile web remove @sinapisai/dsh-provider
 安装或卸载后请重启 Harness。
 
 ## 常见问题
+
+安装时 pnpm 可能提示缺少 `@deepseek-ai/*` peer dependency。Harness 会从自身安装目录
+解析这些依赖，以避免在每个 profile 中重复安装框架实例。如果命令最终显示 `Done`，
+不要再手工安装提示中的 peer dependency。
 
 如果 3080 端口被占用：
 

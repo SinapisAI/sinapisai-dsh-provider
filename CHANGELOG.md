@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+- Reuse the `pi-ai` runtime supplied by DeepSeek Harness instead of installing a duplicate provider SDK tree.
+- Install Schemastery as the provider's direct runtime dependency.
+
 ## 0.1.0
 
 - Add the native SinapisAI provider for DeepSeek Harness.

@@ -22,10 +22,11 @@ DeepSeek Harness.
 
 ## Install
 
-Install DeepSeek Harness if the `dsh` command is not already available:
+Install DeepSeek Harness and the package manager used by `dsh plugin` if they
+are not already available:
 
 ```powershell
-npm install --global @deepseek-ai/dsh
+npm install --global @deepseek-ai/dsh pnpm
 ```
 
 Install the published package and start Harness:
@@ -72,6 +73,12 @@ dsh plugin --profile web remove @sinapisai/dsh-provider
 Restart Harness after installation or removal.
 
 ## Troubleshooting
+
+During installation, pnpm may report missing `@deepseek-ai/*` peer
+dependencies. Harness deliberately resolves those peers from its own
+installation instead of installing duplicate framework instances into each
+profile. If the command ends with `Done`, do not install the listed peers
+manually.
 
 If port 3080 is occupied, locate and stop the previous process:
 
