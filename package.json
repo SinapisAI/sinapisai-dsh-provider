@@ -1,0 +1,84 @@
+{
+  "name": "@sinapisai/dsh-provider",
+  "version": "0.1.0",
+  "description": "Native SinapisAI model provider for DeepSeek Harness",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.cjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "catalog.js",
+    "observer.js",
+    "client.cjs",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh-CN.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-api-remotes"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node --test test/native-provider.test.js",
+    "check": "node --check index.js && node --check catalog.js && node --check observer.js && node --check client.cjs && node --test test/native-provider.test.js",
+    "pack:check": "npm pack --dry-run"
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "llm",
+    "llm-provider",
+    "openai-compatible",
+    "sinapisai"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SinapisAI/sinapisai-dsh-provider.git"
+  },
+  "homepage": "https://github.com/SinapisAI/sinapisai-dsh-provider#readme",
+  "bugs": {
+    "url": "https://github.com/SinapisAI/sinapisai-dsh-provider/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "@earendil-works/pi-ai": "^0.82.1"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-api-remotes": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-client-locale": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-client-runtime": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-client-ui-settings": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-credentials": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-launch-environment": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-llm": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-llm-pi-ai": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-settings": "^0.1.0-rc.7",
+    "@deepseek-ai/schemastery": "^3.18.1",
+    "react": "^18.2.0"
+  }
+}

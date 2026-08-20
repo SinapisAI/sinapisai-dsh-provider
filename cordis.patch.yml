@@ -1,0 +1,8 @@
+- insert:
+    - id: llm-sinapisai
+      name: '@sinapisai/dsh-provider'
+
+- id: agent-default-model
+  config:
+    provider: sinapisai
+    model: sinapisai/router
