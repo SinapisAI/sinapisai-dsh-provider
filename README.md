@@ -32,10 +32,14 @@ switch models repeatedly for coding, analysis, tool use, or other workloads.
 
 ## Install
 
+Before installing the plugin, make sure `pnpm` is available in your terminal.
+If it is not installed, follow the
+[official pnpm installation guide](https://pnpm.io/installation).
+
 If you run DeepSeek Harness through the official npx workflow:
 
 ```powershell
-corepack enable
+pnpm --version
 npx -y --package @deepseek-ai/dsh dsh plugin --profile web add github:SinapisAI/sinapisai-dsh-provider
 npx -y @deepseek-ai/dsh web
 ```

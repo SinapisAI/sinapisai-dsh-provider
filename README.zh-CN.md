@@ -27,10 +27,13 @@ SinapisAI 是提供 OpenAI 兼容接口和智能模型路由能力的大模型 A
 
 ## 安装
 
+安装插件前，请先确保终端可以运行 `pnpm`。如果尚未安装，请参考
+[pnpm 官方安装说明](https://pnpm.io/installation)。
+
 如果你通过官方的 npx 方式运行 DeepSeek Harness：
 
 ```powershell
-corepack enable
+pnpm --version
 npx -y --package @deepseek-ai/dsh dsh plugin --profile web add github:SinapisAI/sinapisai-dsh-provider
 npx -y @deepseek-ai/dsh web
 ```
