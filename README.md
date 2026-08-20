@@ -74,8 +74,8 @@ Restart Harness after installation or removal.
 
 ## Troubleshooting
 
-During installation, pnpm may report missing `@deepseek-ai/*` peer
-dependencies. Harness deliberately resolves those peers from its own
+Older releases or other community plugins may cause pnpm to report missing
+`@deepseek-ai/*` peer dependencies. Harness resolves those peers from its own
 installation instead of installing duplicate framework instances into each
 profile. If the command ends with `Done`, do not install the listed peers
 manually.

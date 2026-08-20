@@ -207,6 +207,10 @@ test('ships a native, searchable and secret-free provider Bundle', async () => {
   assert.equal(packageJson.dependencies['@deepseek-ai/schemastery'], '^3.18.1')
   assert.equal(packageJson.dependencies['@earendil-works/pi-ai'], undefined)
   assert.equal(packageJson.peerDependencies['@earendil-works/pi-ai'], '^0.82.1')
+  for (const [name, range] of Object.entries(packageJson.peerDependencies)) {
+    assert.equal(packageJson.peerDependenciesMeta[name]?.optional, true, `${name} is supplied by the Harness host`)
+    assert.equal(packageJson.devDependencies[name], range, `${name} is available for local development`)
+  }
   assert.equal(packageJson.exports['./client'], './client.cjs')
   assert.equal(packageJson.dsh.client.platform, 'web')
   assert.match(patch, /id: llm-sinapisai/)

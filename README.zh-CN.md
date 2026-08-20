@@ -67,9 +67,9 @@ dsh plugin --profile web remove @sinapisai/dsh-provider
 
 ## 常见问题
 
-安装时 pnpm 可能提示缺少 `@deepseek-ai/*` peer dependency。Harness 会从自身安装目录
-解析这些依赖，以避免在每个 profile 中重复安装框架实例。如果命令最终显示 `Done`，
-不要再手工安装提示中的 peer dependency。
+旧版插件或其他社区插件可能让 pnpm 提示缺少 `@deepseek-ai/*` peer dependency。
+Harness 会从自身安装目录解析这些依赖，以避免在每个 profile 中重复安装框架实例。
+如果命令最终显示 `Done`，不要再手工安装提示中的 peer dependency。
 
 如果 3080 端口被占用：
 
